@@ -1,0 +1,81 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #111;
+  color: white;
+  font-family: Arial, sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  text-align: center;
+  padding: 50px 20px 30px;
+}
+
+main {
+  width: 100%;
+  margin-top: 10vh;
+}
+
+h1 {
+  font-size: clamp(48px, 10vw, 100px);
+  margin: 0 0 45px;
+  font-weight: 700;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.button {
+  display: block;
+  width: min(350px, 90vw);
+  padding: 16px 25px;
+
+  background: white;
+  color: #111;
+
+  text-decoration: none;
+  border-radius: 10px;
+
+  font-size: 20px;
+  text-align: center;
+
+  transition: transform 0.15s, background 0.15s;
+}
+
+.button:hover {
+  transform: scale(1.03);
+  background: #ddd;
+}
+
+.countdown {
+  width: 100%;
+}
+
+.countdown-title {
+  font-size: 15px;
+  opacity: 0.6;
+  margin-bottom: 8px;
+}
+
+#timer {
+  font-size: clamp(28px, 7vw, 55px);
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+#message {
+  margin-top: 8px;
+  font-size: 16px;
+}
