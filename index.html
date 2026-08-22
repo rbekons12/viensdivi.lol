@@ -1,80 +1,43 @@
 <!DOCTYPE html>
 <html lang="lv">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>viensdivi.lol</title>
-  
+    <meta charset="UTF-8">
+    <title>viensdivi.lol</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <main>
+<div class="container">
+
     <h1>Čau kakao</h1>
 
-    <div class="buttons">
-      <a class="button" href="/arhivs/">"12" Arhīvs</a>
+    <nav>
+        <a href="index.html">Sākums</a>
+        <a href="projects.html">Projekti</a>
+        <a href="archive.html">Arhīvs</a>
+        <a href="about.html">Par mums</a>
+        <a href="contacts.html">Kontakti</a>
+    </nav>
 
-      <!-- Add more buttons here -->
-      <!--
-      <a class="button" href="/something/">Vēl kaut kas</a>
-      -->
-    </div>
-  </main>
+    <hr>
 
+    <h2>viensdivi.lol</h2>
 
-  <div class="countdown">
-    <div class="countdown-title">
-      "12" 2 gadu jubileja
-    </div>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
-    <div id="timer">00:00:00:00</div>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
-    <div id="message"></div>
-  </div>
+    <h2>Jaunumi</h2>
 
+    <p>Lorem ipsum dolor sit amet.</p>
 
-  <script>
-    const targetDate = new Date("2026-09-02T20:12:00");
+    <footer>
+        viensdivi.lol
+    </footer>
 
-    function updateTimer() {
-      const now = new Date();
-      const difference = targetDate - now;
-
-      if (difference <= 0) {
-        document.getElementById("timer").textContent = "00:00:00:00";
-        document.getElementById("message").textContent =
-          'Kopienas "12" 2 gadu jubileja ir klāt!';
-        return;
-      }
-
-      const days = Math.floor(
-        difference / (1000 * 60 * 60 * 24)
-      );
-
-      const hours = Math.floor(
-        (difference / (1000 * 60 * 60)) % 24
-      );
-
-      const minutes = Math.floor(
-        (difference / (1000 * 60)) % 60
-      );
-
-      const seconds = Math.floor(
-        (difference / 1000) % 60
-      );
-
-      document.getElementById("timer").textContent =
-        `${String(days).padStart(2, "0")}:` +
-        `${String(hours).padStart(2, "0")}:` +
-        `${String(minutes).padStart(2, "0")}:` +
-        `${String(seconds).padStart(2, "0")}`;
-    }
-
-    updateTimer();
-    setInterval(updateTimer, 1000);
-  </script>
+</div>
 
 </body>
 </html>
