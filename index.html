@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kopienas "12" 2 gadu jubileja</title>
+
+  <title>viensdivi.lol</title>
 
   <style>
     * {
@@ -13,51 +14,101 @@
     body {
       margin: 0;
       min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       background: #111;
       color: white;
       font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
       text-align: center;
+      padding: 50px 20px 30px;
     }
 
-    .container {
-      width: 100%;
-      padding: 20px;
+    main {
+      margin-top: 10vh;
     }
 
     h1 {
-      font-size: clamp(28px, 6vw, 56px);
-      margin-bottom: 40px;
-      font-weight: 600;
+      font-size: clamp(48px, 10vw, 100px);
+      margin: 0 0 45px;
+      font-weight: 700;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: min(350px, 90vw);
+    }
+
+    .button {
+      display: block;
+      padding: 16px 25px;
+      background: white;
+      color: #111;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 20px;
+      transition: 0.15s;
+    }
+
+    .button:hover {
+      transform: scale(1.03);
+      background: #ddd;
+    }
+
+    .countdown {
+      width: 100%;
+    }
+
+    .countdown-title {
+      font-size: 15px;
+      opacity: 0.6;
+      margin-bottom: 8px;
     }
 
     #timer {
-      font-size: clamp(45px, 12vw, 110px);
+      font-size: clamp(28px, 7vw, 55px);
       font-weight: bold;
       letter-spacing: 2px;
     }
 
     #message {
-      margin-top: 30px;
-      font-size: 24px;
+      margin-top: 8px;
+      font-size: 16px;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="container">
-    <h1>Kopienas "12" 2 gadu jubileja</h1>
+  <main>
+    <h1>Čau kakao</h1>
+
+    <div class="buttons">
+      <a class="button" href="/arhivs/">"12" Arhīvs</a>
+
+      <!-- Add more buttons here -->
+      <!--
+      <a class="button" href="/something/">Vēl kaut kas</a>
+      -->
+    </div>
+  </main>
+
+
+  <div class="countdown">
+    <div class="countdown-title">
+      "12" 2 gadu jubileja
+    </div>
 
     <div id="timer">00:00:00:00</div>
 
     <div id="message"></div>
   </div>
 
+
   <script>
-    // Mērķis: 2026. gada 2. septembris, 20:12
     const targetDate = new Date("2026-09-02T20:12:00");
 
     function updateTimer() {
@@ -67,17 +118,22 @@
       if (difference <= 0) {
         document.getElementById("timer").textContent = "00:00:00:00";
         document.getElementById("message").textContent =
-          "Kopienas \"12\" 2 gadu jubileja ir klāt!";
+          'Kopienas "12" 2 gadu jubileja ir klāt!';
         return;
       }
 
-      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const days = Math.floor(
+        difference / (1000 * 60 * 60 * 24)
+      );
+
       const hours = Math.floor(
         (difference / (1000 * 60 * 60)) % 24
       );
+
       const minutes = Math.floor(
         (difference / (1000 * 60)) % 60
       );
+
       const seconds = Math.floor(
         (difference / 1000) % 60
       );
