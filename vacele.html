@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <title>Vācelīte — viensdivi.lol</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #vacele-lock {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        #vacele-lock input {
+            background: black;
+            color: white;
+            border: 1px solid white;
+            padding: 8px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #vacele-lock button {
+            background: black;
+            color: white;
+            border: 1px solid white;
+            padding: 8px 14px;
+            margin-left: 8px;
+            font-family: Arial, Helvetica, sans-serif;
+            cursor: pointer;
+        }
+        #vacele-lock-box {
+            text-align: center;
+        }
+        #vacele-error {
+            margin-top: 10px;
+        }
+        #vacele-content.blurred {
+            filter: blur(8px);
+            pointer-events: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Vācelīte</h1>
+    <nav>
+        <a href="index.html">Sākums</a>
+        <a href="projects.html">Projekti</a>
+        <a href="youtube.html">YouTube</a>
+        <a href="spotify.html">Spotify</a>
+        <a href="vacele.html">Vācelīte</a>
+        <a href="laika.html">Laikā</a>
+        <a href="archive.html">Arhīvs</a>
+        <a href="about.html">Par mums</a>
+        <a href="contacts.html">Kontakti</a>
+    </nav>
+    <hr>
+
+    <div id="vacele-content" class="blurred">
+        <h2>Vārdu un izteicienu vācelīte</h2>
+        <ul>
+            <li>čoini</li>
+            <li>sosla</li>
+        </ul>
+    </div>
+
+    <footer>
+        viensdivi.lol
+    </footer>
+</div>
+
+<div id="vacele-lock">
+    <div id="vacele-lock-box">
+        <p>Ievadi piekļuves kodu:</p>
+        <input type="password" id="vacele-code" autocomplete="off">
+        <button id="vacele-submit">Ieeja</button>
+        <p id="vacele-error"></p>
+    </div>
+</div>
+
+<script>
+    var PIEKLUVES_KODS = "sosla";
+
+    function pieverEjPie() {
+        var kods = document.getElementById("vacele-code").value;
+        if (kods === PIEKLUVES_KODS) {
+            document.getElementById("vacele-lock").style.display = "none";
+            document.getElementById("vacele-content").classList.remove("blurred");
+        } else {
+            document.getElementById("vacele-error").textContent = "Nepareizs kods, mēģini vēlreiz.";
+        }
+    }
+
+    document.getElementById("vacele-submit").addEventListener("click", pieverEjPie);
+    document.getElementById("vacele-code").addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            pieverEjPie();
+        }
+    });
+</script>
+</body>
+</html>
