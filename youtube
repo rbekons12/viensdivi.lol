@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <title>YouTube — viensdivi.lol</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>YouTube</h1>
+    <nav>
+        <a href="index.html">Sākums</a>
+        <a href="projects.html">Projekti</a>
+        <a href="youtube.html">YouTube</a>
+        <a href="spotify.html">Spotify</a>
+        <a href="vacele.html">Vācelīte</a>
+        <a href="laika.html">Laikā</a>
+        <a href="archive.html">Arhīvs</a>
+        <a href="about.html">Par mums</a>
+        <a href="contacts.html">Kontakti</a>
+    </nav>
+    <hr>
+
+    <h2>YouTube kanāls</h2>
+    <p><a href="https://youtube.com/@kopiena12" target="_blank" rel="noopener">youtube.com/@kopiena12</a></p>
+
+    <hr>
+
+    <h2>Video</h2>
+
+    <h3><a href="https://youtu.be/ywUlN9QvdFg?si=My0QhaJmxNs_lUdg" target="_blank" rel="noopener">Īsfilma "Prakse"</a></h3>
+
+    <h3>2025. gada ziemas ragaviņu sacensības</h3>
+    <p>Coming soon — vēl nav publicēts.</p>
+
+    <h3>Velobrauciens uz Jūrmalu</h3>
+    <p>Coming soon — vēl nav publicēts.</p>
+
+    <footer>
+        viensdivi.lol
+    </footer>
+</div>
+</body>
+</html>
