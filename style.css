@@ -4,32 +4,25 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 30px;
 }
-
 a {
     color: white;
 }
-
 a:visited {
     color: white;
 }
-
 hr {
     border: 0;
     border-top: 1px solid white;
 }
-
 .container {
     max-width: 800px;
 }
-
 nav {
     margin-bottom: 30px;
 }
-
 nav a {
     margin-right: 15px;
 }
-
 footer {
     margin-top: 50px;
     border-top: 1px solid white;
