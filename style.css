@@ -28,3 +28,235 @@ footer {
     border-top: 1px solid white;
     padding-top: 10px;
 }
+
+/* ============================================================
+   JAUNS: Logo (augšējā kreisajā stūrī)
+   ============================================================ */
+.top-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.logo-link {
+    display: inline-block;
+    line-height: 0;
+}
+.logo {
+    height: 42px;
+    width: auto;
+    display: block;
+}
+@media (max-width: 480px) {
+    .logo {
+        height: 32px;
+    }
+}
+
+/* ============================================================
+   JAUNS: Projektu fold/unfold
+   ============================================================ */
+.fold-section {
+    margin-bottom: 12px;
+}
+.fold-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: black;
+    color: white;
+    border: 1px solid white;
+    padding: 10px 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.15em;
+    cursor: pointer;
+    text-align: left;
+}
+.fold-toggle:hover {
+    background: #141414;
+}
+.fold-arrow {
+    margin-left: 10px;
+}
+.fold-content {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease;
+    padding: 0 4px;
+}
+.fold-section.open .fold-content {
+    max-height: 3000px;
+    padding-top: 12px;
+}
+
+/* ============================================================
+   JAUNS: Vācelītes kategorijas
+   ============================================================ */
+.vacele-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.vacele-tab {
+    background: black;
+    color: white;
+    border: 1px solid white;
+    padding: 8px 14px;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.vacele-tab.active {
+    background: white;
+    color: black;
+}
+.vacele-panel {
+    display: none;
+    position: relative;
+    min-height: 100px;
+}
+.vacele-panel.active {
+    display: block;
+}
+.vacele-lock-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}
+.vacele-lock-box {
+    text-align: center;
+    padding: 10px;
+}
+.vacele-lock-box input {
+    background: black;
+    color: white;
+    border: 1px solid white;
+    padding: 8px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.vacele-lock-box button {
+    background: black;
+    color: white;
+    border: 1px solid white;
+    padding: 8px 14px;
+    margin-left: 8px;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+.vacele-panel-content.blurred {
+    filter: blur(8px);
+    pointer-events: none;
+    user-select: none;
+}
+
+/* ============================================================
+   JAUNS: Kopienas jaunumi (saraksts)
+   ============================================================ */
+.news-item {
+    margin-bottom: 18px;
+}
+.news-item .news-date {
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+/* ============================================================
+   JAUNS: Ziņas nosūtīšanas poga un modālais logs
+   ============================================================ */
+.contact-fab {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: black;
+    color: white;
+    border: 1px solid white;
+    font-size: 1.4em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+}
+.contact-fab:hover {
+    background: #141414;
+}
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(3px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 30;
+    padding: 20px;
+}
+.modal-overlay.open {
+    display: flex;
+}
+.modal-box {
+    background: black;
+    border: 1px solid white;
+    max-width: 420px;
+    width: 100%;
+    padding: 20px;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+.modal-close {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.4em;
+    cursor: pointer;
+    line-height: 1;
+}
+.modal-box h2 {
+    margin-top: 0;
+}
+.modal-box label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 4px;
+}
+.modal-box input,
+.modal-box textarea {
+    width: 100%;
+    background: black;
+    color: white;
+    border: 1px solid white;
+    padding: 8px;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+.modal-box textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+.modal-submit {
+    margin-top: 16px;
+    background: white;
+    color: black;
+    border: 1px solid white;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.modal-submit:hover {
+    background: #dddddd;
+}
+.modal-status {
+    margin-top: 10px;
+    min-height: 1.2em;
+}
