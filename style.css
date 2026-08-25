@@ -296,3 +296,7 @@ footer {
     margin-top: 10px;
     min-height: 1.2em;
 }
+
+.vacele-tabs {
+    display: none;
+}
