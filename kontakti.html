@@ -2,27 +2,58 @@
 <html lang="lv">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kontakti — viensdivi.lol</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="container">
+    <div class="top-bar">
+        <a href="index.html" class="logo-link">
+            <img src="logo.png" alt="viensdivi.lol logotips" class="logo">
+        </a>
+    </div>
     <h1>Kontakti</h1>
     <nav>
         <a href="index.html">Sākums</a>
         <a href="projekti.html">Projekti</a>
         <a href="vacelite.html">Vācelīte</a>
         <a href="vesture_arhivs.html">Vēsture & Arhīvs</a>
-        <a href="par_mums.html">Par mums</a>
+        <a href="about.html">Par mums</a>
+        <a href="news.html">Kopienas jaunumi</a>
         <a href="kontakti.html">Kontakti</a>
     </nav>
     <hr>
     <h2>Sazinies ar mums</h2>
     <p>E-pasts: contact@viensdivi.lol</p>
-    <p>Pagaidām šis ir vienīgais veids, kā mūs sasniegt — raksti jebkurā jautājumā.</p>
+    <p>Vari uzrakstīt tieši uz šo e-pastu vai izmantot ziņas nosūtīšanas pogu labajā apakšējā stūrī.</p>
     <footer>
         viensdivi.lol
     </footer>
 </div>
+
+<button id="contact-fab" class="contact-fab" aria-label="Nosūtīt ziņu" title="Nosūtīt ziņu">✉</button>
+
+<div id="contact-modal" class="modal-overlay">
+    <div class="modal-box">
+        <button class="modal-close" aria-label="Aizvērt">×</button>
+        <h2>Nosūtīt ziņu</h2>
+        <form id="contact-form">
+            <label for="contact-name">Vārds</label>
+            <input type="text" id="contact-name" name="name">
+
+            <label for="contact-email">E-pasts</label>
+            <input type="email" id="contact-email" name="email">
+
+            <label for="contact-message">Ziņa</label>
+            <textarea id="contact-message" name="message"></textarea>
+
+            <button type="submit" class="modal-submit">Nosūtīt</button>
+            <p class="modal-status"></p>
+        </form>
+    </div>
+</div>
+
+<script src="site.js"></script>
 </body>
 </html>
