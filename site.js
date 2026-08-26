@@ -23,7 +23,7 @@ function initLoadingScreen() {
         loader.classList.add("fade-out");
         setTimeout(function () {
             loader.style.display = "none";
-        }, 200);
+        }, 400);
     }, 300);
 }
 
