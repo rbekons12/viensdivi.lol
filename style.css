@@ -34,7 +34,17 @@ nav {
     background: black;
     padding: 10px 0;
     z-index: 10;
-    box-shadow: 0 6px 6px -6px rgba(255, 255, 255, 0.15);
+}
+
+nav::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -18px;
+    height: 18px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0));
+    pointer-events: none;
 }
 
 nav a {
@@ -235,4 +245,44 @@ footer {
 .news-item .news-date {
     font-size: 0.9em;
     opacity: 0.8;
+}
+
+/* ============================================================
+   Vēsture & Arhīvs — vertikālā laika līnija
+   ============================================================ */
+.timeline {
+    position: relative;
+    margin: 24px 0;
+    padding-left: 30px;
+    border-left: 1px solid white;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 26px;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -34px;
+    top: 4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: white;
+}
+
+.timeline-title {
+    font-weight: bold;
+}
+
+.timeline-date {
+    margin-top: 2px;
+    font-size: 0.9em;
+    opacity: 0.75;
 }
