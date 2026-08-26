@@ -29,20 +29,35 @@ hr {
 
 nav {
     margin-bottom: 30px;
+    position: sticky;
+    top: 0;
+    background: black;
+    padding: 10px 0;
+    z-index: 10;
 }
 
 nav a {
     margin-right: 15px;
+    padding: 6px 4px;
+    display: inline-block;
+}
+
+@media (max-width: 480px) {
+    nav a {
+        padding: 10px 8px;
+        margin-right: 6px;
+    }
 }
 
 footer {
     margin-top: 50px;
     border-top: 1px solid white;
     padding-top: 10px;
+    color: #888888;
 }
 
 /* ============================================================
-   JAUNS: Logo (augšējā kreisajā stūrī)
+   Logo (augšējā kreisajā stūrī)
    ============================================================ */
 .top-bar {
     display: flex;
@@ -68,7 +83,50 @@ footer {
 }
 
 /* ============================================================
-   JAUNS: Projektu fold/unfold
+   Fake loading screen
+   ============================================================ */
+#loading-screen {
+    position: fixed;
+    inset: 0;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: opacity 0.4s ease;
+    opacity: 1;
+}
+
+#loading-screen.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-logo {
+    height: 60px;
+    width: auto;
+    display: block;
+    margin-bottom: 22px;
+}
+
+.loading-spinner {
+    width: 34px;
+    height: 34px;
+    border: 3px solid #333333;
+    border-top: 3px solid white;
+    border-radius: 50%;
+    animation: loading-spin 0.8s linear infinite;
+}
+
+@keyframes loading-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ============================================================
+   Projektu fold/unfold
    ============================================================ */
 .fold-section {
     margin-bottom: 12px;
@@ -109,28 +167,8 @@ footer {
 }
 
 /* ============================================================
-   JAUNS: Vācelītes kategorijas
+   Vācelītes kategorijas
    ============================================================ */
-.vacele-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.vacele-tab {
-    background: black;
-    color: white;
-    border: 1px solid white;
-    padding: 8px 14px;
-    cursor: pointer;
-}
-
-.vacele-tab.active {
-    background: white;
-    color: black;
-}
-
 .vacele-panel {
     display: none;
     position: relative;
@@ -179,7 +217,7 @@ footer {
 }
 
 /* ============================================================
-   JAUNS: Kopienas jaunumi (saraksts)
+   Kopienas jaunumi (saraksts)
    ============================================================ */
 .news-item {
     margin-bottom: 18px;
@@ -188,111 +226,4 @@ footer {
 .news-item .news-date {
     font-size: 0.9em;
     opacity: 0.8;
-}
-
-/* ============================================================
-   JAUNS: Ziņas nosūtīšanas poga un modālais logs
-   ============================================================ */
-.contact-fab {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: black;
-    color: white;
-    border: 1px solid white;
-    font-size: 1.4em;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 20;
-}
-
-.contact-fab:hover {
-    background: #141414;
-}
-
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(3px);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 30;
-    padding: 20px;
-}
-
-.modal-overlay.open {
-    display: flex;
-}
-
-.modal-box {
-    background: black;
-    border: 1px solid white;
-    max-width: 420px;
-    width: 100%;
-    padding: 20px;
-    position: relative;
-    max-height: 90vh;
-    overflow-y: auto;
-}
-
-.modal-close {
-    position: absolute;
-    top: 8px;
-    right: 12px;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.4em;
-    cursor: pointer;
-    line-height: 1;
-}
-
-.modal-box h2 {
-    margin-top: 0;
-}
-
-.modal-box label {
-    display: block;
-    margin-top: 12px;
-    margin-bottom: 4px;
-}
-
-.modal-box input,
-.modal-box textarea {
-    width: 100%;
-    background: black;
-    color: white;
-    border: 1px solid white;
-    padding: 8px;
-    box-sizing: border-box;
-}
-
-.modal-box textarea {
-    min-height: 100px;
-    resize: vertical;
-}
-
-.modal-submit {
-    margin-top: 16px;
-    background: white;
-    color: black;
-    border: 1px solid white;
-    padding: 8px 16px;
-    cursor: pointer;
-}
-
-.modal-submit:hover {
-    background: #dddddd;
-}
-
-.modal-status {
-    margin-top: 10px;
-    min-height: 1.2em;
 }
