@@ -24,7 +24,7 @@ function initLoadingScreen() {
         setTimeout(function () {
             loader.style.display = "none";
         }, 400);
-    }, 1500);
+    }, 600);
 }
 
 /* ------------------------------------------------------------
