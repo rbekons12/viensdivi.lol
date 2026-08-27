@@ -185,9 +185,13 @@ function pad2(n) {
    Jokus vēlāk var brīvi nomainīt šajā sarakstā.
    ------------------------------------------------------------ */
 var DAILY_JOKES = [
-    "Joks 1",
-    "Joks 2",
-    "Joks 3"
+    "Kāds Dolāram kurss? Talsi-Dundaga",
+    "Stulbs cilveks - maina apenes, gudrs - nutella maize",
+    "Kas ir sarkans un kaitē zobiem? Ķieģelis.",
+    "-Eu,Janka aizej pec alus. -Aj,nepatīk vienam iet pakaļ. -Nu tad ej pēc diviem!",
+    "Kas notiek, ja sakrusto ASV+Krieviju+Vāciju un arābu = Obama bļa fon Ladens",
+    "Kā Daunis kļuva gudrāks? Sākot mācīties."
+   
 ];
 
 function getRigaDateKey(rigaDate) {
