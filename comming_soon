@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Drīzumā — viensdivi.lol</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container comming-soon-container">
+    <img src="logo.png" alt="viensdivi.lol logotips" class="comming-soon-logo">
+    <h1 class="comming-soon-title">Šeit nekas vēl nav. Mēs pie tā strādājam!</h1>
+    <p>
+        <a href="index.html" id="back-link" class="comming-soon-back">← doties atpakaļ</a>
+    </p>
+</div>
+
+<script src="site.js"></script>
+</body>
+</html>
