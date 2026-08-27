@@ -7,7 +7,7 @@
    4. TIMELINE DATA (vienīgais datu avots "12" notikumiem)
    5. Timeline renderēšana (Vēsture & Arhīvs)
    6. DAILY JOKE
-   7. 12 HOLIDAY / UPCOMING
+   7. "Drīzumā" pogas back-navigācija
    ============================================================ */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
     initVaceleTabs();
     initTimeline();
     initDailyJoke();
-    initHolidayCountdown();
+    initCommingSoonBack();
 });
 
 /* ------------------------------------------------------------
@@ -107,28 +107,24 @@ function initVaceleTabs() {
 /* ------------------------------------------------------------
    4. TIMELINE DATA
    Vienīgais datu avots "12" notikumiem. No šejienes tiek
-   automātiski ģenerēti: Vēsture & Arhīvs timeline, nākamie
-   ("upcoming") notikumi un augšējais "12" svētku countdown.
+   automātiski ģenerēts Vēsture & Arhīvs timeline.
 
    Katram ierakstam:
    - title: notikuma nosaukums
    - date:  "GGGG-MM-DD" formātā
    - time:  (nav obligāts) "HH:MM", ja notikumam ir precīzs laiks
-   - type:  "milestone" (parasts notikums) vai
-            "holiday"   ("12" svētki — atkārtojas ik gadu pēc
-                          mēneša/dienas, piem. dibināšanas diena)
 
    Lai pievienotu jaunu notikumu, pievieno jaunu objektu šim
    sarakstam — nekas cits kodā nav jāmaina.
    ------------------------------------------------------------ */
 var TIMELINE_DATA = [
-    { title: "Lil Ziema × DJ Ricka — “Freaky Phonk” publicēšana", date: "2024-07-17", type: "milestone" },
-    { title: "“12” Discord servera dibināšana", date: "2024-09-02", time: "20:12", type: "holiday" },
-    { title: "Roblox spēle \"Baranki Gnu Obby\"", date: "2024-12-30", type: "milestone" },
-    { title: "Roblox spēle “Berry Picking”", date: "2025-10-10", type: "milestone" },
-    { title: "Mr Choppedos ierakstīšanas sesija", date: "2026-07-26", type: "milestone" },
-    { title: "Čipsi Džinsi - \"Strīda dziesmiņa\" publicēšana", date: "2026-08-20", type: "milestone" },
-    { title: "“12” kopienas mājaslapas izveide", date: "2026-08-22", type: "milestone" }
+    { title: "Lil Ziema × DJ Ricka — “Freaky Phonk” publicēšana", date: "2024-07-17" },
+    { title: "“12” Discord servera dibināšana", date: "2024-09-02", time: "20:12" },
+    { title: "Roblox spēle \"Baranki Gnu Obby\"", date: "2024-12-30" },
+    { title: "Roblox spēle “Berry Picking”", date: "2025-10-10" },
+    { title: "Mr Choppedos ierakstīšanas sesija", date: "2026-07-26" },
+    { title: "Čipsi Džinsi - \"Strīda dziesmiņa\" publicēšana", date: "2026-08-20" },
+    { title: "“12” kopienas mājaslapas izveide", date: "2026-08-22" }
 ];
 
 function formatTimelineDisplayDate(item) {
@@ -138,13 +134,6 @@ function formatTimelineDisplayDate(item) {
         displayDate += " · " + item.time;
     }
     return displayDate;
-}
-
-function getUpcomingEvents(referenceDate) {
-    var ref = referenceDate || new Date();
-    return TIMELINE_DATA
-        .filter(function (item) { return new Date(item.date) >= ref; })
-        .sort(function (a, b) { return new Date(a.date) - new Date(b.date); });
 }
 
 /* ------------------------------------------------------------
@@ -229,11 +218,14 @@ function getSecondsUntilNextRigaDay(rigaDate) {
     return Math.max(0, Math.round((nextMidnight - rigaDate) / 1000));
 }
 
-function formatCountdown(totalSeconds) {
-    var h = Math.floor(totalSeconds / 3600);
-    var m = Math.floor((totalSeconds % 3600) / 60);
-    var s = totalSeconds % 60;
-    return pad2(h) + ":" + pad2(m) + ":" + pad2(s);
+function formatJokeCountdown(totalSeconds) {
+    var totalMinutes = Math.ceil(totalSeconds / 60);
+    var h = Math.floor(totalMinutes / 60);
+    var m = totalMinutes % 60;
+    if (h > 0) {
+        return h + "h " + m + "min";
+    }
+    return m + "min";
 }
 
 function initDailyJoke() {
@@ -245,72 +237,29 @@ function initDailyJoke() {
         var rigaNow = getRigaNow();
         jokeEl.textContent = pickDailyJoke(rigaNow);
         var secondsLeft = getSecondsUntilNextRigaDay(rigaNow);
-        countdownEl.textContent = "Nākamais pēc " + formatCountdown(secondsLeft);
+        countdownEl.textContent = "Nākamais joks pēc " + formatJokeCountdown(secondsLeft);
     }
 
     render();
-    setInterval(render, 1000);
+    setInterval(render, 30000);
 }
 
 /* ------------------------------------------------------------
-   7. 12 HOLIDAY / UPCOMING
-   Izmanto TIMELINE_DATA notikumus ar type: "holiday" un aprēķina
-   nākamo gada atkārtojumu (pēc mēneša/dienas) katram no tiem,
-   tad parāda to, kas pienāk drīzāk. Ja tas ir šodien — īpašs
-   paziņojums; pēc dienas automātiski pāriet uz nākamo notikumu.
+   7. "DRĪZUMĀ" POGAS BACK-NAVIGĀCIJA
+   Izmanto pārlūka vēsturi, lai lietotājs nonāktu tieši tajā
+   vietā, no kurienes atnāca. Ja vēstures nav, atgriežas uz
+   index.html.
    ------------------------------------------------------------ */
-function getNextHolidayOccurrence(holiday, rigaToday) {
-    var parts = holiday.date.split("-");
-    var month = parseInt(parts[1], 10) - 1;
-    var day = parseInt(parts[2], 10);
+function initCommingSoonBack() {
+    var backLink = document.getElementById("back-link");
+    if (!backLink) return;
 
-    var occurrence = new Date(rigaToday.getFullYear(), month, day);
-    if (occurrence < rigaToday) {
-        occurrence = new Date(rigaToday.getFullYear() + 1, month, day);
-    }
-    return occurrence;
-}
-
-function dayWord(n) {
-    return n === 1 ? "dienas" : "dienām";
-}
-
-function initHolidayCountdown() {
-    var el = document.getElementById("holiday-countdown");
-    if (!el) return;
-
-    var holidays = TIMELINE_DATA.filter(function (item) {
-        return item.type === "holiday";
-    });
-
-    function render() {
-        if (!holidays.length) {
-            el.textContent = "";
-            return;
-        }
-
-        var rigaNow = getRigaNow();
-        var rigaToday = new Date(rigaNow.getFullYear(), rigaNow.getMonth(), rigaNow.getDate());
-
-        var next = null;
-        var nextDiffDays = null;
-
-        holidays.forEach(function (holiday) {
-            var occurrence = getNextHolidayOccurrence(holiday, rigaToday);
-            var diffDays = Math.round((occurrence - rigaToday) / 86400000);
-            if (nextDiffDays === null || diffDays < nextDiffDays) {
-                nextDiffDays = diffDays;
-                next = holiday;
-            }
-        });
-
-        if (nextDiffDays === 0) {
-            el.textContent = "Šodien ir “12” svētki!";
+    backLink.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (window.history.length > 1) {
+            window.history.back();
         } else {
-            el.textContent = "“12” svētki pēc " + nextDiffDays + " " + dayWord(nextDiffDays);
+            window.location.href = "index.html";
         }
-    }
-
-    render();
-    setInterval(render, 60000);
+    });
 }
