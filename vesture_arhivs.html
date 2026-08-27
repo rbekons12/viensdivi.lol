@@ -9,9 +9,18 @@
 <body>
 <div class="container">
     <div class="top-bar">
-        <a href="index.html" class="logo-link">
-            <img src="logo.png" alt="viensdivi.lol logotips" class="logo">
-        </a>
+        <div class="top-bar-logo">
+            <a href="index.html" class="logo-link">
+                <img src="logo.png" alt="viensdivi.lol logotips" class="logo">
+            </a>
+        </div>
+        <div class="top-bar-joke">
+            <p class="joke-text" id="daily-joke-text"></p>
+            <p class="joke-countdown" id="daily-joke-countdown"></p>
+        </div>
+        <div class="top-bar-holiday">
+            <p class="holiday-text" id="holiday-countdown"></p>
+        </div>
     </div>
     <h1>Vēsture & Arhīvs</h1>
     <nav>
@@ -29,44 +38,12 @@
     <hr>
 
     <!--
-        Laika līnijas paraugs. Katru jaunu notikumu var pievienot kā
-        jaunu .timeline-item bloku:
-
-        <div class="timeline-item">
-            <p class="timeline-title">Notikuma nosaukums</p>
-            <p class="timeline-date">DD.MM.GGGG.</p>
-        </div>
+        Laika līnija tiek automātiski uzģenerēta no TIMELINE_DATA
+        (skaties site.js, sadaļa "TIMELINE DATA"). Lai pievienotu
+        jaunu notikumu, pievieno to TIMELINE_DATA sarakstam —
+        šeit nekas manuāli nav jāmaina.
     -->
-    <div class="timeline">
-        <div class="timeline-item">
-            <p class="timeline-title">Lil Ziema × DJ Ricka — “Freaky Phonk” publicēšana</p>
-            <p class="timeline-date">17.07.2024</p>
-        </div>
-        <div class="timeline-item">
-            <p class="timeline-title">“12” Discord servera dibināšana</p>
-            <p class="timeline-date">02.09.2024 · 20:12</p>
-        </div>
-        <div class="timeline-item">
-            <p class="timeline-title">Roblox spēle "Baranki Gnu Obby"</p>
-            <p class="timeline-date">30.12.2024</p>
-        </div>
-        <div class="timeline-item">
-            <p class="timeline-title">Roblox spēle “Berry Picking”</p>
-            <p class="timeline-date">10.10.2025</p>
-        </div>
-        <div class="timeline-item">
-            <p class="timeline-title">Mr Choppedos ierakstīšanas sesija</p>
-            <p class="timeline-date">26.07.2026</p>
-        </div>
-        <div class="timeline-item">
-            <p class="timeline-title">Čipsi Džinsi - "Strīda dziesmiņa" publicēšana</p>
-            <p class="timeline-date">20.08.2026</p>
-        </div>
-         <div class="timeline-item">
-            <p class="timeline-title">“12” kopienas mājaslapas izveide</p>
-            <p class="timeline-date">22.08.2026</p>
-        </div>
-    </div>
+    <div class="timeline" id="timeline-container"></div>
 
     <footer>
         © kopiena "12"
