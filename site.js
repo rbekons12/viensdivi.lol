@@ -185,7 +185,7 @@ function pad2(n) {
    Jokus vēlāk var brīvi nomainīt šajā sarakstā.
    ------------------------------------------------------------ */
 var DAILY_JOKES = [
-    "Kāds dolāram kurss? Talsi-Dundaga",
+    "Joks 1",
     "Joks 2",
     "Joks 3"
 ];
