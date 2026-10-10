@@ -190,7 +190,17 @@ var DAILY_JOKES = [
     "Kas ir sarkans un kaitē zobiem? Ķieģelis.",
     "-Eu,Janka aizej pec alus. -Aj,nepatīk vienam iet pakaļ. -Nu tad ej pēc diviem!",
     "Kas notiek, ja sakrusto ASV+Krieviju+Vāciju un arābu = Obama bļa fon Ladens",
-    "Kā Daunis kļuva gudrāks? Sākot mācīties."
+    "Kā Daunis kļuva gudrāks? Sākot mācīties.",
+    "Vajag būt optimistam: Ja pat veiksme uzgriež muguru, vajag teikt - kāda smuka pakaļa!",
+    "Vīrietis pateica - vīrietis izdarīja, ja neizdarīja - pateica vēlreiz.",
+    "Ja gribi, lai meitene raksta pirmā, tad aizņemies no viņas naudu.",
+    "Ja kaut kas nesanāk ar pirmo reizi, vienmēr ir iespēja padoties",
+    "Daudzi sūdzās par savu izskatu, bet neviens nesūdzas par savām smadzenēm",
+    "Dzīve ir bēdīga, bet vismaz alga ir smieklīga",
+    "Sievietes ir ļoti jaukas. Viņas spēj piedot vīrietim, ja pat viņš ne pie kā nav vainīgs.",
+    "Ja dzīve tev met ar ķieģeļiem, tad taisa sev māju no tiem",
+    "Saka, ka skopais maksā divreiz, tāpēc es strādāju pie skopā.",
+    "Ne viss, kas spīd ir zelts, dažreiz tas ir plikais pauris"
    
 ];
 
