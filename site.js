@@ -200,7 +200,8 @@ var DAILY_JOKES = [
     "Sievietes ir ļoti jaukas. Viņas spēj piedot vīrietim, ja pat viņš ne pie kā nav vainīgs.",
     "Ja dzīve tev met ar ķieģeļiem, tad taisa sev māju no tiem",
     "Saka, ka skopais maksā divreiz, tāpēc es strādāju pie skopā.",
-    "Ne viss, kas spīd ir zelts, dažreiz tas ir plikais pauris"
+    "Ne viss, kas spīd ir zelts, dažreiz tas ir plikais pauris",
+    "Tētis palūdza, lai sagriežu kartupeļus. Tā arī darīju, paņēmu lapu, uzrakstīju 'kartupeļi' un sagriezu to vairākās daļās."
    
 ];
 
