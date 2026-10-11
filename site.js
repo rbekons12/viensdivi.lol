@@ -8,6 +8,8 @@
    5. Timeline renderēšana (Vēsture & Arhīvs)
    6. DAILY JOKE
    7. "Drīzumā" pogas back-navigācija
+   8. Fotoarhīvs (filmas strēmele + lightbox)
+   9. Veikals (merch katalogs)
    ============================================================ */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -17,6 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
     initTimeline();
     initDailyJoke();
     initCommingSoonBack();
+    initPhotoArchive();
+    initShop();
 });
 
 /* ------------------------------------------------------------
@@ -202,7 +206,7 @@ var DAILY_JOKES = [
     "Saka, ka skopais maksā divreiz, tāpēc es strādāju pie skopā.",
     "Ne viss, kas spīd ir zelts, dažreiz tas ir plikais pauris",
     "Tētis palūdza, lai sagriežu kartupeļus. Tā arī darīju, paņēmu lapu, uzrakstīju 'kartupeļi' un sagriezu to vairākās daļās."
-   
+
 ];
 
 function getRigaDateKey(rigaDate) {
@@ -276,5 +280,269 @@ function initCommingSoonBack() {
         } else {
             window.location.href = "index.html";
         }
+    });
+}
+
+/* ------------------------------------------------------------
+   8. FOTOARHĪVS (fotoarhivs.html)
+   Dati: photoArchive saraksts atrodas pašā fotoarhivs.html
+   (sadaļa "FOTOARHĪVA DATI"). Šeit nekas nav jāmaina.
+   Skripts darbojas tikai lapā, kurā ir #photo-archive.
+   ------------------------------------------------------------ */
+
+/* Izveido elementu ar tekstu (textContent — nekad raw HTML) */
+function makeTextEl(tag, className, text) {
+    var el = document.createElement(tag);
+    if (className) el.className = className;
+    el.textContent = text;
+    return el;
+}
+
+/* Tukšs / nepastāvošs lauks → false, lai metadatu rindu var paslēpt */
+function hasText(value) {
+    return typeof value === "string" && value.trim() !== "";
+}
+
+/* Vietturis, ja attēla fails vēl nav pievienots */
+function makePhotoPlaceholder() {
+    return makeTextEl("span", "photo-placeholder", "Pievieno foto");
+}
+
+/* Attēls ar rezerves variantu (nav lauzta attēla ikonas) */
+function makePhotoImage(photo, altText) {
+    if (!hasText(photo.src)) return makePhotoPlaceholder();
+
+    var img = document.createElement("img");
+    img.src = photo.src;
+    img.alt = altText;
+    img.loading = "lazy";
+    img.addEventListener("error", function () {
+        if (img.parentNode) img.parentNode.replaceChild(makePhotoPlaceholder(), img);
+    });
+    return img;
+}
+
+function initPhotoArchive() {
+    var root = document.getElementById("photo-archive");
+    if (!root) return;
+
+    var archive = (typeof photoArchive !== "undefined" && Array.isArray(photoArchive)) ? photoArchive : [];
+
+    if (!archive.length) {
+        root.appendChild(makeTextEl("p", "photo-empty", "Fotoarhīvs pagaidām ir tukšs."));
+        return;
+    }
+
+    /* Plakans saraksts ar visiem kadriem lightbox pārslēgšanai */
+    var allFrames = [];
+
+    archive.forEach(function (event, eventIndex) {
+        var eventTitle = hasText(event.title) ? event.title : "Pasākums";
+        var photos = Array.isArray(event.photos) ? event.photos : [];
+
+        var section = document.createElement("section");
+        section.className = "photo-event";
+        section.setAttribute("aria-labelledby", "photo-event-" + eventIndex);
+
+        var head = document.createElement("div");
+        head.className = "photo-event-head";
+        var heading = makeTextEl("h2", "", eventTitle);
+        heading.id = "photo-event-" + eventIndex;
+        head.appendChild(heading);
+        if (hasText(event.date)) {
+            head.appendChild(makeTextEl("p", "photo-event-date", event.date));
+        }
+        section.appendChild(head);
+
+        var strip = document.createElement("div");
+        strip.className = "film-strip";
+        /* ļauj ritināt strēmeli ar tastatūru */
+        strip.tabIndex = 0;
+        strip.setAttribute("role", "group");
+        strip.setAttribute("aria-label", eventTitle + " — fotogrāfijas");
+
+        var track = document.createElement("div");
+        track.className = "film-track";
+
+        photos.forEach(function (photo, photoIndex) {
+            var altText = hasText(photo.alt)
+                ? photo.alt
+                : eventTitle + " — foto " + (photoIndex + 1);
+
+            var frame = document.createElement("button");
+            frame.type = "button";
+            frame.className = "film-frame";
+            frame.setAttribute("aria-label", "Atvērt: " + altText);
+            frame.appendChild(makePhotoImage(photo, altText));
+
+            var frameData = { event: event, eventTitle: eventTitle, photo: photo, alt: altText, button: frame };
+            allFrames.push(frameData);
+            frame.addEventListener("click", function () {
+                openLightbox(allFrames.indexOf(frameData));
+            });
+
+            track.appendChild(frame);
+        });
+
+        if (!photos.length) {
+            track.appendChild(makeTextEl("p", "photo-empty", "Foto drīz tiks pievienoti."));
+        }
+
+        strip.appendChild(track);
+        section.appendChild(strip);
+        root.appendChild(section);
+    });
+
+    /* ---------- Lightbox ---------- */
+    var lightbox = document.createElement("div");
+    lightbox.className = "lightbox";
+    lightbox.hidden = true;
+    lightbox.setAttribute("role", "dialog");
+    lightbox.setAttribute("aria-modal", "true");
+    lightbox.setAttribute("aria-label", "Fotogrāfijas apskate");
+
+    var figure = document.createElement("figure");
+    figure.className = "lightbox-figure";
+    var imageSlot = document.createElement("div");
+    var meta = document.createElement("figcaption");
+    meta.className = "lightbox-meta";
+    figure.appendChild(imageSlot);
+    figure.appendChild(meta);
+
+    var closeBtn = makeTextEl("button", "lightbox-btn lightbox-close", "✕");
+    closeBtn.type = "button";
+    closeBtn.setAttribute("aria-label", "Aizvērt");
+    var prevBtn = makeTextEl("button", "lightbox-btn lightbox-prev", "←");
+    prevBtn.type = "button";
+    prevBtn.setAttribute("aria-label", "Iepriekšējais foto");
+    var nextBtn = makeTextEl("button", "lightbox-btn lightbox-next", "→");
+    nextBtn.type = "button";
+    nextBtn.setAttribute("aria-label", "Nākamais foto");
+
+    lightbox.appendChild(figure);
+    lightbox.appendChild(closeBtn);
+    lightbox.appendChild(prevBtn);
+    lightbox.appendChild(nextBtn);
+    document.body.appendChild(lightbox);
+
+    var currentIndex = -1;
+
+    function renderLightbox() {
+        var item = allFrames[currentIndex];
+        var photo = item.photo;
+
+        imageSlot.innerHTML = "";
+        imageSlot.appendChild(makePhotoImage(photo, item.alt));
+
+        meta.innerHTML = "";
+        meta.appendChild(makeTextEl("p", "lightbox-event", item.eventTitle));
+        if (hasText(photo.photographer)) {
+            meta.appendChild(makeTextEl("p", "", "Autors: " + photo.photographer));
+        }
+        if (hasText(photo.people)) {
+            meta.appendChild(makeTextEl("p", "", "Foto redzami: " + photo.people));
+        }
+        if (hasText(photo.caption)) {
+            meta.appendChild(makeTextEl("p", "", photo.caption));
+        }
+
+        prevBtn.hidden = currentIndex <= 0;
+        nextBtn.hidden = currentIndex >= allFrames.length - 1;
+    }
+
+    function openLightbox(index) {
+        currentIndex = index;
+        renderLightbox();
+        lightbox.hidden = false;
+        document.body.style.overflow = "hidden";
+        closeBtn.focus();
+    }
+
+    function closeLightbox() {
+        if (lightbox.hidden) return;
+        lightbox.hidden = true;
+        document.body.style.overflow = "";
+        var item = allFrames[currentIndex];
+        if (item && item.button) item.button.focus();
+    }
+
+    function step(delta) {
+        var next = currentIndex + delta;
+        if (next < 0 || next >= allFrames.length) return;
+        currentIndex = next;
+        renderLightbox();
+    }
+
+    closeBtn.addEventListener("click", closeLightbox);
+    prevBtn.addEventListener("click", function () { step(-1); });
+    nextBtn.addEventListener("click", function () { step(1); });
+
+    /* klikšķis uz tumšā fona (ne uz attēla/pogām) aizver */
+    lightbox.addEventListener("click", function (e) {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", function (e) {
+        if (lightbox.hidden) return;
+        if (e.key === "Escape") closeLightbox();
+        else if (e.key === "ArrowLeft") step(-1);
+        else if (e.key === "ArrowRight") step(1);
+    });
+}
+
+/* ------------------------------------------------------------
+   9. VEIKALS (veikals.html)
+   Dati: merchProducts saraksts atrodas pašā veikals.html
+   (sadaļa "PRODUKTU DATI"). Šeit nekas nav jāmaina.
+   Skripts darbojas tikai lapā, kurā ir #shop-grid.
+   ------------------------------------------------------------ */
+function initShop() {
+    var grid = document.getElementById("shop-grid");
+    if (!grid) return;
+
+    var products = (typeof merchProducts !== "undefined" && Array.isArray(merchProducts)) ? merchProducts : [];
+
+    products.forEach(function (product) {
+        var item = document.createElement("article");
+        item.className = "shop-item";
+
+        var visual = document.createElement("div");
+        visual.className = "shop-item-visual";
+        if (hasText(product.image)) {
+            var img = document.createElement("img");
+            img.src = product.image;
+            img.alt = hasText(product.alt) ? product.alt : product.name;
+            img.loading = "lazy";
+            img.addEventListener("error", function () {
+                visual.textContent = product.name;
+            });
+            visual.appendChild(img);
+        } else {
+            /* nav attēla — tīrs tipogrāfisks vietturis */
+            visual.textContent = product.name;
+        }
+        item.appendChild(visual);
+
+        var body = document.createElement("div");
+        body.className = "shop-item-body";
+        body.appendChild(makeTextEl("h3", "", product.name));
+        if (hasText(product.description)) {
+            body.appendChild(makeTextEl("p", "", product.description));
+        }
+        body.appendChild(makeTextEl("p", "shop-status", product.available ? "PIEEJAMS" : "NAV PIEEJAMS"));
+
+        /* saite parādās tikai tad, ja produkts ir pieejams un ievadīta saite */
+        if (product.available && hasText(product.link)) {
+            var p = document.createElement("p");
+            var a = makeTextEl("a", "", "Skatīt →");
+            a.href = product.link;
+            a.target = "_blank";
+            a.rel = "noopener";
+            p.appendChild(a);
+            body.appendChild(p);
+        }
+
+        item.appendChild(body);
+        grid.appendChild(item);
     });
 }
