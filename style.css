@@ -677,3 +677,282 @@ footer {
         background: var(--color-hover);
     }
 }
+
+/* ============================================================
+   FOTOARHĪVS — filmas strēmele + lightbox
+   (fotoarhivs.html; saturs nāk no photoArchive saraksta)
+   ============================================================ */
+.photo-event {
+    margin: 0 0 var(--space-xl);
+}
+
+.photo-event-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-3xs) var(--space-sm);
+    margin-bottom: var(--space-xs);
+}
+
+.photo-event-head h2 {
+    margin: 0;
+    text-transform: none;
+    letter-spacing: var(--tracking-tight);
+    font-size: var(--fs-h3);
+}
+
+.photo-event-date {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: var(--fs-meta);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+}
+
+/* ritināmais konteiners — ritinās tikai pati strēmele, nevis lapa */
+.film-strip {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border: 1px solid var(--color-border-strong);
+    background: #070707;
+    scroll-snap-type: x proximity;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border-strong) transparent;
+}
+
+/* iekšējā sliede: kadri + perforācijas augšā un apakšā */
+.film-track {
+    display: flex;
+    gap: var(--space-xs);
+    width: max-content;
+    min-width: 100%;
+    padding: 24px var(--space-sm);
+    background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.28) 0 8px, transparent 8px),
+        linear-gradient(to right, rgba(255, 255, 255, 0.28) 0 8px, transparent 8px);
+    background-size: 18px 7px, 18px 7px;
+    background-repeat: repeat-x, repeat-x;
+    background-position: 0 8px, 0 calc(100% - 8px);
+}
+
+.film-frame {
+    flex: 0 0 auto;
+    height: clamp(140px, 26vw, 190px);
+    aspect-ratio: 3 / 2;
+    padding: 0;
+    background: #000;
+    border: 1px solid var(--color-border);
+    color: var(--color-muted);
+    font-size: var(--fs-meta);
+    cursor: pointer;
+    overflow: hidden;
+    scroll-snap-align: start;
+    transition: border-color var(--ease);
+}
+
+@media (hover: hover) {
+    .film-frame:hover {
+        border-color: var(--color-border-strong);
+    }
+}
+
+.film-frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* rāda, ja attēla fails vēl nav pievienots */
+.photo-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: var(--space-2xs);
+    text-align: center;
+    color: var(--color-muted);
+    font-size: var(--fs-meta);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    border: 1px dashed var(--color-border);
+}
+
+.photo-empty {
+    color: var(--color-muted);
+}
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: var(--space-xl) var(--space-sm) var(--space-md);
+    background: rgba(0, 0, 0, 0.94);
+}
+
+.lightbox[hidden] {
+    display: none;
+}
+
+.lightbox-figure {
+    margin: 0;
+    max-width: min(100%, 62rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    min-height: 0;
+}
+
+.lightbox-figure img {
+    display: block;
+    max-width: 100%;
+    max-height: 68vh;
+    object-fit: contain;
+}
+
+.lightbox-figure .photo-placeholder {
+    width: min(90vw, 36rem);
+    height: 40vh;
+}
+
+.lightbox-meta {
+    width: 100%;
+    max-width: 36rem;
+    font-size: var(--fs-meta);
+    letter-spacing: var(--tracking-wide);
+}
+
+.lightbox-meta p {
+    margin: 0 0 var(--space-3xs);
+    color: var(--color-muted);
+}
+
+.lightbox-meta .lightbox-event {
+    color: var(--color-fg);
+    text-transform: uppercase;
+}
+
+.lightbox-btn {
+    position: absolute;
+    background: transparent;
+    color: var(--color-fg);
+    border: 1px solid var(--color-border-strong);
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 var(--space-xs);
+    font-size: var(--fs-body);
+    cursor: pointer;
+    transition: background-color var(--ease);
+}
+
+@media (hover: hover) {
+    .lightbox-btn:hover {
+        background: var(--color-hover-strong);
+    }
+}
+
+.lightbox-close {
+    top: var(--space-sm);
+    right: var(--space-sm);
+}
+
+.lightbox-prev,
+.lightbox-next {
+    bottom: var(--space-md);
+}
+
+.lightbox-prev {
+    left: var(--space-sm);
+}
+
+.lightbox-next {
+    right: var(--space-sm);
+}
+
+.lightbox-btn[hidden] {
+    display: none;
+}
+
+/* ============================================================
+   VEIKALS — Čipsi Džinsi merch katalogs (bez pirkšanas)
+   ============================================================ */
+.shop-note {
+    margin: 0 0 var(--space-lg);
+    color: var(--color-muted);
+}
+
+.shop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+    gap: var(--space-md);
+    counter-reset: shopidx;
+}
+
+.shop-item {
+    counter-increment: shopidx;
+    border: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+}
+
+.shop-item-visual {
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-sm);
+    text-align: center;
+    border-bottom: 1px solid var(--color-border);
+    background: #070707;
+    color: var(--color-muted);
+    font-size: var(--fs-meta);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    overflow: hidden;
+}
+
+.shop-item-visual img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.shop-item-body {
+    padding: var(--space-sm);
+}
+
+.shop-item-body h3 {
+    margin-top: 0;
+}
+
+.shop-item-body h3::before {
+    content: counter(shopidx, decimal-leading-zero) "  ";
+    color: var(--color-muted);
+    font-weight: 400;
+}
+
+.shop-item-body p {
+    font-size: var(--fs-meta);
+}
+
+.shop-status {
+    display: inline-block;
+    margin: 0;
+    padding: var(--space-3xs) var(--space-2xs);
+    border: 1px solid var(--color-border-strong);
+    font-size: var(--fs-meta);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+}
