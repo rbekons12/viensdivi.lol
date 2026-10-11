@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fotoarhīvs — viensdivi.lol</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <div class="top-bar">
+        <div class="top-bar-logo">
+            <a href="index.html" class="logo-link">
+                <img src="logo.png" alt="viensdivi.lol logotips" class="logo">
+            </a>
+        </div>
+        <div class="top-bar-joke">
+            <p class="joke-text" id="daily-joke-text"></p>
+            <p class="joke-countdown" id="daily-joke-countdown"></p>
+        </div>
+    </div>
+    <h1>Fotoarhīvs</h1>
+    <nav>
+        <a href="index.html">Sākums</a>
+        <a href="par_mums.html">Par mums</a>
+        <a href="vesture_arhivs.html">Vēsture & Arhīvs</a>
+        <a href="projekti.html">Projekti</a>
+        <a href="muzikalie_pakalpojumi.html">Muzikālie pakalpojumi</a>
+        <a href="fotoarhivs.html">Fotoarhīvs</a>
+        <a href="veikals.html">Veikals</a>
+        <a href="kontakti.html">Kontakti</a>
+    </nav>
+    <hr>
+
+    <p>Fotogrāfijas no kopienas "12" pasākumiem. Uzspied uz kadra, lai skatītu lielāku versiju.</p>
+
+    <!-- Šeit tiek uzģenerēti pasākumi un filmas strēmeles (skaties photoArchive zemāk) -->
+    <div id="photo-archive"></div>
+
+    <footer>
+        © kopiena "12"
+    </footer>
+</div>
+
+<!--
+    ============================================================
+    FOTOARHĪVA DATI  —  ŠEIT PIEVIENO PASĀKUMUS UN FOTO
+    ============================================================
+    Lapas izkārtojums un HTML nav jālabo. Viss, kas redzams lapā,
+    tiek uzģenerēts no šī saraksta.
+
+    KĀ PIEVIENOT JAUNU PASĀKUMU
+      1. Nokopē visu bloku no { title: ... līdz atbilstošajai },
+      2. ielīmē to saraksta beigās (aiz iepriekšējā bloka un komata),
+      3. nomaini title, date un foto.
+
+    KĀ PIEVIENOT JAUNU FOTO
+      1. Ieliec attēla failu mapē  images/fotoarhivs/
+         (piem. images/fotoarhivs/piga-04.jpg),
+      2. nokopē vienu bloku { src: ..., photographer: ... },
+         ielīmē aiz iepriekšējā (nepamet komatu starp blokiem),
+      3. nomaini src un pārējos laukus.
+
+    LAUKI KATRAM FOTO
+      src          — ceļš uz attēlu, vienmēr sākas ar  images/fotoarhivs/
+      photographer — foto autors (nav obligāts)
+      people       — kas redzams fotogrāfijā (nav obligāts)
+      caption      — īss paraksts (nav obligāts)
+      alt          — attēla apraksts redzes invalīdiem (nav obligāts;
+                     ja tukšs, tiks izmantots pasākuma nosaukums + numurs)
+
+    Tukšu lauku ('') lapā nerāda — nekādu tukšu iekavu vai "undefined".
+    Ja attēla fails vēl nav pievienots, lapā redzams vietturis
+    "Pievieno foto". Vietturu vērtības [vārds] / [vārdi] aizstāj ar
+    īstajām, kad tās zināmas — vai izdzēs lauku (ieliec '').
+
+    Atbalstītie formāti: .jpg  .jpeg  .png  .webp  .gif  .avif
+    Faila nosaukums: tikai mazie burti, cipari un domuzīmes,
+    bez garumzīmēm un atstarpēm (piem. piga-01.jpg).
+    ============================================================
+-->
+<script>
+var photoArchive = [
+    {
+        // PIEMĒRS: nomaini nosaukumu un gadu uz īstajiem datiem
+        title: 'Akustiskais koncerts gastrobarā "Piga"',
+        date: '2026',
+        photos: [
+            {
+                src: 'images/fotoarhivs/piga-01.jpg',
+                photographer: '[vārds]',
+                people: '[vārdi]',
+                caption: '',
+                alt: ''
+            },
+            {
+                src: 'images/fotoarhivs/piga-02.jpg',
+                photographer: '[vārds]',
+                people: '[vārdi]',
+                caption: '',
+                alt: ''
+            },
+            {
+                src: 'images/fotoarhivs/piga-03.jpg',
+                photographer: '[vārds]',
+                people: '[vārdi]',
+                caption: '',
+                alt: ''
+            }
+        ]
+    }
+    // Nākamo pasākumu pievieno šeit: ieliec komatu aiz augšējās } un ielīmē jaunu bloku
+];
+</script>
+<script src="site.js"></script>
+</body>
+</html>
