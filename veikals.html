@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Veikals — viensdivi.lol</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <div class="top-bar">
+        <div class="top-bar-logo">
+            <a href="index.html" class="logo-link">
+                <img src="logo.png" alt="viensdivi.lol logotips" class="logo">
+            </a>
+        </div>
+        <div class="top-bar-joke">
+            <p class="joke-text" id="daily-joke-text"></p>
+            <p class="joke-countdown" id="daily-joke-countdown"></p>
+        </div>
+    </div>
+    <h1>Veikals</h1>
+    <nav>
+        <a href="index.html">Sākums</a>
+        <a href="par_mums.html">Par mums</a>
+        <a href="vesture_arhivs.html">Vēsture & Arhīvs</a>
+        <a href="projekti.html">Projekti</a>
+        <a href="muzikalie_pakalpojumi.html">Muzikālie pakalpojumi</a>
+        <a href="fotoarhivs.html">Fotoarhīvs</a>
+        <a href="veikals.html">Veikals</a>
+        <a href="kontakti.html">Kontakti</a>
+    </nav>
+    <hr>
+
+    <h2>Čipsi Džinsi merch</h2>
+    <p class="shop-note">Pašlaik nekas nav pieejams iegādei. Jauni izdevumi un merch tiks pievienoti šeit.</p>
+
+    <!-- Produkti tiek uzģenerēti no merchProducts saraksta zemāk -->
+    <div class="shop-grid" id="shop-grid"></div>
+
+    <footer>
+        © kopiena "12"
+    </footer>
+</div>
+
+<!--
+    ============================================================
+    PRODUKTU DATI  —  ŠEIT PIEVIENO UN LABO PRODUKTUS
+    ============================================================
+    Lapas HTML nav jālabo. Katrs { ... } bloks ir viens produkts.
+
+    KĀ PIEVIENOT PRODUKTU
+      Nokopē vienu bloku, ielīmē to saraksta beigās (pēc komata)
+      un nomaini laukus.
+
+    LAUKI
+      name        — produkta nosaukums
+      description — īss apraksts (nav obligāts; ja tukšs, nerāda)
+      image       — ceļš uz attēlu, piem. 'images/veikals/tshirt-01.jpg'
+                    (nav obligāts; ja tukšs, rāda tipogrāfisku vietturi)
+      alt         — attēla apraksts (nav obligāts)
+      available   — false = "NAV PIEEJAMS", true = "PIEEJAMS"
+      link        — saite uz iegādi (nav obligāta; parādās tikai tad,
+                    ja available ir true un saite ir ievadīta)
+
+    Cenas un grozu šī lapa apzināti nerāda.
+    ============================================================
+-->
+<script>
+var merchProducts = [
+    {
+        name: 'T-krekli',
+        description: '',
+        image: '',
+        alt: '',
+        available: false,
+        link: ''
+    },
+    {
+        name: 'CD',
+        description: '',
+        image: '',
+        alt: '',
+        available: false,
+        link: ''
+    },
+    {
+        name: 'Vinila plates',
+        description: '',
+        image: '',
+        alt: '',
+        available: false,
+        link: ''
+    }
+];
+</script>
+<script src="site.js"></script>
+</body>
+</html>
